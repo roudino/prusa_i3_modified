@@ -1,6 +1,6 @@
 include <configuration.scad>
 
-%translate([80,0,50])rotate([0,-90,0])import("stl/x-carriage.stl",center=true);
+//%translate([80,0,50])rotate([0,-90,0])import("stl/x-carriage.stl",center=true);
 rotate([-0,0,0])difference(){
 	dremel_support();
 	//#translate([8,-14,5])dial();
