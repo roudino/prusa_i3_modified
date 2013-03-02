@@ -3,7 +3,7 @@ include <configuration.scad>
 
 //sanguinololu();
 
-sanguinololu_bottom();
+mirror()sanguinololu_bottom();
 translate([0,60,-4])rotate([0,180,0])sanguinololu_top();
 
 module sanguinololu_top(width=80,length=40){
@@ -19,25 +19,32 @@ module sanguinololu_bottom(){
 	difference(){
 		translate([0,0,-13.1])cube_fillet([106, 56, 14],vertical = [0,0,2,2],bottom = [2,2,2,2], center = true);
 		#translate([0,0,-2])sanguinololu();
-		translate([45,20,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
+/**/		translate([45,20,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
 		translate([45,-20,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
 		translate([-45,20,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
 		translate([-45,-20,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
 
-		translate([0,26,-10.1])cube_fillet([80, 4, 12],center = true);
-		translate([-52,-12,-10.1])cube_fillet([4, 20, 12],center = true);
+		translate([0,26,-10.1])cube([80, 4, 12],center = true);
+		translate([-52,-12,-10.1])cube([4, 20, 12],center = true);
 	};
 	rotate([0,0,-180])translate([-65,-28,-18])support();
 	mirror()rotate([0,0,-180])translate([-65,-28,-18])support();
 }
 
 module sanguinololu(){
-	cube([102,52,32], center=true);
+	difference(){
+		cube([102,52,32], center=true);
+		translate([47,22,-20])cylinder(r=3,h=5);
+		translate([-47,-22,-20])cylinder(r=3,h=5);
+		translate([-47,22,-20])cylinder(r=3,h=5);
+		translate([47,-22,-20])cylinder(r=3,h=5);
+	}
 	translate([-38,-26.8,-9])cube([12,3.5,10],center=true);
-	translate([-45,-20,-20])cylinder(r=2,h=45);
-	translate([-45,20,-20])cylinder(r=2,h=45);
-	translate([45,-20,-20])cylinder(r=2,h=45);
-	translate([45,20,-20])cylinder(r=2,h=45);
+	translate([-47,-22,-20])cylinder(r=2,h=45);
+	translate([-47,22,-20])cylinder(r=2,h=45);
+	translate([47,-22,-20])cylinder(r=2,h=45);
+	translate([47,22,-20])cylinder(r=2,h=45);
+
 }
 
 module support(){
