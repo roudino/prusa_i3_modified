@@ -17,7 +17,7 @@ module sanguinololu_top(width=80,length=40){
 
 module sanguinololu_bottom(){
 	difference(){
-		translate([0,0,-13.1])cube_fillet([106, 54, 14],vertical = [2,2,2,2],bottom = [2,2,2,2], center = true);
+		translate([0,0,-13.1])cube_fillet([106, 54, 14],vertical = [0,0,2,2],bottom = [2,2,2,2], center = true);
 		#translate([0,0,-2])sanguinololu();
 		/*translate([45,20,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
 		translate([45,-20,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
