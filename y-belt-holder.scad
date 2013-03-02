@@ -21,10 +21,10 @@ translate([0, -10, 0])rotate([0,0,-90]){
     		translate([1.7, -8, 12.5]) cube_fillet([20, 5, 25],vertical = [2,2,0,2], center = true);
 
     		difference(){        	
-            translate([-4.0, 5, 12.5]) cube_fillet([8.5, 26, 25], center = true, vertical = [1,1,0,0], fn=8);        
+            translate([-4.0, 0, 12.5]) cube_fillet([8.5, 18, 25], center = true, vertical = [1,1,0,0], fn=8);        
         		       
         
-        		translate([0,7,0])intersection() {
+        		translate([0,2,0])intersection() {
             	for (i = [0 : 35/belt_tooth_distance])
             	{
                 	translate([-9.0, 0, 1+i*belt_tooth_distance]) cube([3, 10, belt_tooth_distance*belt_tooth_ratio], center = true);
@@ -37,7 +37,7 @@ translate([0, -10, 0])rotate([0,0,-90]){
 
 		translate([5, -4, 5]) rotate([90, 0, 0]) screw();
 		translate([5, -4, 20]) rotate([90, 0, 0]) screw();
-		translate([-5,12,12])belt_clamp_nut();
+		translate([-5,-10.8,12])belt_clamp_nut();
 		translate([5,-4.5,5])rotate([90,0,0])nut(d=m3_nut_diameter_horizontal,h=2.5);
 		translate([5,-4.5,20])rotate([90,0,0])nut(d=m3_nut_diameter_horizontal,h=2.5);
 
