@@ -4,7 +4,7 @@ include <configuration.scad>
 //sanguinololu();
 
 mirror()sanguinololu_bottom();
-translate([0,60,-4])rotate([0,180,0])sanguinololu_top();
+//translate([0,60,-4])rotate([0,180,0])sanguinololu_top();
 
 module sanguinololu_top(width=80,length=40){
 	difference(){
@@ -19,10 +19,10 @@ module sanguinololu_bottom(){
 	difference(){
 		translate([0,0,-13.1])cube_fillet([106, 56, 14],vertical = [0,0,2,2],bottom = [2,2,2,2], center = true);
 		#translate([0,0,-2])sanguinololu();
-/**/		translate([45,20,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
-		translate([45,-20,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
-		translate([-45,20,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
-		translate([-45,-20,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
+/**/		translate([47,22,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
+		translate([47,-22,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
+		translate([-47,22,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
+		translate([-47,-22,-21])nut(d=m4_nut_diameter_horizontal,h=2.5);
 
 		translate([0,26,-10.1])cube([80, 4, 12],center = true);
 		translate([-52,-12,-10.1])cube([4, 20, 12],center = true);
