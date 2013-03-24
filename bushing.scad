@@ -109,7 +109,10 @@ module firm_foot(){
             translate([3-0.25,16,0]) cube_fillet([8.5,18,20], top=[11,0,0,0], center=true);
         }
         #translate([7,14,0]) rotate([0,-90,0]) screw();
+			translate([7.1,14,0]) rotate([0,-90,0]) color("red")nut(d=m3_nut_diameter,h=3);
+
     }
+
 }
 
 module spring_foot(){
