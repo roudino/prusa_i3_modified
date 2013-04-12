@@ -24,7 +24,7 @@ geeksbase_mount=512;
 malcolm_extrusion_mount=1024;	//broken
 
 //default_extruder_mount=malcolm_extrusion_mount;
-default_extruder_mount=groovemount;
+default_extruder_mount=grrf_peek_mount;//groovemount;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -797,7 +797,7 @@ module mendel_parts_v6_holes (insulator_d=12.7)
 //grrf_peek_mount_holes();
 module grrf_peek_mount_holes()  
 {  
-	extruder_recess_d=16.5;
+	extruder_recess_d=16;
 	extruder_recess_h=10;
 
 	// Recess in base
