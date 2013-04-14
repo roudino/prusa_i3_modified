@@ -1,6 +1,6 @@
 include <configuration.scad>
 
-alu_profile_caps();
+rotate([180,0,0])alu_profile_caps();
 
 module alu_profile_caps(){
 	cube_fillet([30,30,3], center = true, top=[3,3,3,3],$fn=36);

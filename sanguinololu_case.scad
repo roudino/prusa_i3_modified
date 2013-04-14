@@ -7,15 +7,53 @@ bottom_width=140;
 bottom_depth=80;
 bottom_height=30;
 
+top_width=140;
+top_depth=110;
+top_height=10;
+
 //sanguinololu();
-sanguinololu_bottom();
+//sanguinololu_bottom();
+translate([0,0,30])rotate([-180,0,0])sanguinololu_top();
+//fan();
+module fan(){
+	for(x=[-1,1]){
+		for(y=[-1,1]){
+			difference(){
+				translate([x*30,y*30,0])cylinder(r=8.2,h=8,$fn=6);
+				translate([x*30,y*30,-1])cylinder(r=4,h=12,$fn=6);
+			}
+		}
+	}
+}
+module sanguinololu_top(){
+	translate([55,40,2])fan();
+	//case
+	difference(){
+		translate([0,-30,0])cube_fillet([top_width,top_depth,top_height],bottom=[1,1,1,1],vertical=[2,2,2,2]);
+		translate([wall_width,wall_width-30,-2*wall_width])cube_fillet([top_width-2*wall_width,bottom_depth-2*wall_width,top_height+wall_width],bottom=[2,2,2,2],vertical=[2,2,2,2]);
+		translate([-3,-31,-2])cube_fillet([32,32,50]);
+		translate([wall_width,46,-wall_width])color("red")cube_fillet([136,32,top_height]);
+	
+		translate([25,3,10])holes(diameter=6,height=10,cols=4,rows=4);
+		//holes
+		for(x=[8,bottom_width-8]){
+			for(y=[8,bottom_depth-8]){
+				translate([x,y,-0.1]){
+					cylinder(r=m4_nut_diameter_horizontal/2,h=1.2,$fn=6);
+					cylinder(r=2,h=20,$fn=12);
+				}
+			}
+		}
+
+	}
+}
 
 module sanguinololu_bottom(){
 	//sanguinololu plate
 	translate([60,50,1])sanguinololu();
 
-	mirror()translate([-1,-14,bottom_height/2])rotate([0,0,-90])support(height=30,width=32);
-	translate([bottom_width+15,1,bottom_height/2])support(height=30,width=32);
+	mirror()translate([-1,-13,bottom_height/2])rotate([0,0,-90])support(height=30,width=32);
+	translate([bottom_width+14,1,bottom_height/2])support(height=30,width=32);
 
 	translate([1,1,1.1])cube([bottom_width-2,bottom_depth-2,0.25]);
 
@@ -24,11 +62,11 @@ module sanguinololu_bottom(){
 
 	//case
 	difference(){
-		cube_fillet([bottom_width,bottom_depth,bottom_height],bottom=[2,2,2,2],vertical=[2,2,2,2]);
+		cube_fillet([bottom_width,bottom_depth,bottom_height],bottom=[1,1,1,1],vertical=[2,2,2,2]);
 		translate([wall_width,wall_width,wall_width])cube_fillet([bottom_width-2*wall_width,bottom_depth-2*wall_width,bottom_height+wall_width],bottom=[2,2,2,2],vertical=[2,2,2,2]);
 
 		//back window
-		translate([3,-2,2])cube([bottom_width-6,6,30]);
+		translate([6,-2,2])cube([bottom_width-12,6,30]);
 
 		//usb hole
 		translate([79,70,4.1])color("red")cube([13,16,11]);
@@ -40,7 +78,7 @@ module sanguinololu_bottom(){
 		for(x=[8,bottom_width-8]){
 			for(y=[8,bottom_depth-8]){
 				translate([x,y,-0.1]){
-					nut(r=m3_nut_diameter_horizontal/2,h=1.2);
+					cylinder(r=m4_nut_diameter_horizontal/2,h=1.2,$fn=6);
 					cylinder(r=2,h=10,$fn=12);
 				}
 			}
