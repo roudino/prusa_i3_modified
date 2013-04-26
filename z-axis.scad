@@ -8,6 +8,12 @@
 
 include <configuration.scad>
 
+translate([0, -2, 0]) mirror([0,1,0]) zmotorholder();
+translate([75,2,0]) zmotorholder();
+
+translate([75,-2,0]) mirror([0,1,0])zrodholder();
+translate([20,3,0]) rotate([0,0,180]) mirror([0,1,0]) zrodholder();
+
 
 module zmotorholder(thickness=13){
     difference(){
@@ -47,7 +53,9 @@ module zrodholder(thickness=13, ylen=40, xlen=34){
                     translate([-25,0,0]) cube_fillet([30, 5, thickness], radius=2);
                 }
                 //smooth rod hole
-                translate([board_to_xz_distance,5+(smooth_bar_diameter/2),-1]) cylinder(h=board_thickness+2, r=(smooth_bar_diameter_horizontal/2));
+                translate([board_to_xz_distance,4+(smooth_bar_diameter/2),-1]) 
+rotate([0,0,-90])pushfit_rod(8.4,50);
+//cylinder(h=board_thickness+2, r=(smooth_bar_diameter_horizontal/2));
                 
                 //side screw
                 translate([-15, -5, 6.5]) rotate([-90, 0, 0]) screw_cylinder();
@@ -60,8 +68,9 @@ module zrodholder(thickness=13, ylen=40, xlen=34){
     }
 }
 
-translate([0, -2, 0]) mirror([0,1,0]) zmotorholder();
-//translate([0,2,0]) zmotorholder();
+module pushfit_rod(diameter,length){
+    cylinder(h = length, r=diameter/2, $fn=30);
+    translate([0,-diameter/4,length/2]) cube([diameter,diameter/2,length], center = true);
 
-//translate([21,-59,0]) zrodholder();
-translate([20,3,0]) rotate([0,0,180]) mirror([0,1,0]) zrodholder();
+    translate([0,-diameter/2-1.2,length/2]) cube([diameter,1,length], center = true);
+}

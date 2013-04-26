@@ -87,20 +87,20 @@ module x_carriage(){
             // extruder mounts
             
             translate([20,-2,carriage_hole_to_side]) {
-                rotate([90,0,0]) cylinder(r=1.8, h=22, center=true);
-                translate([0,9,0]) rotate([90,60,0]) cylinder(r=3.4, h=5, $fn=6, center=true);
+                rotate([90,0,0]) cylinder(r=2.2, h=22, center=true);
+                translate([0,9,0]) rotate([90,60,0])cylinder(r=4.2, h=5, $fn=6, center=true);
             }
             translate([20,-2,carriage_hole_to_side+30]) {
-                rotate([90,0,0]) cylinder(r=1.8, h=22, center=true);
-                translate([0,9,0]) rotate([90,60,0]) cylinder(r=3.4, h=5, $fn=6, center=true);
+                rotate([90,0,0]) cylinder(r=2.2, h=22, center=true);
+                translate([0,9,0]) rotate([90,60,0]) cylinder(r=4.2, h=5, $fn=6, center=true);
             }
             translate([20,-2,carriage_hole_to_side+30+20]) {
-                rotate([90,0,0]) cylinder(r=1.8, h=22, center=true);
-                translate([0,9,0]) rotate([90,60,0]) cylinder(r=3.4, h=5, $fn=6, center=true);
+                rotate([90,0,0]) cylinder(r=2.2, h=22, center=true);
+                translate([0,9,0]) rotate([90,60,0]) cylinder(r=4.2, h=5, $fn=6, center=true);
             }
             translate([20,-2,carriage_hole_to_side+30+20+30]) {
-                rotate([90,0,0]) cylinder(r=1.8, h=22, center=true);
-                translate([0,9,0]) rotate([90,60,0]) cylinder(r=3.4, h=5, $fn=6, center=true);
+                rotate([90,0,0]) cylinder(r=2.2, h=22, center=true);
+                translate([0,9,0]) rotate([90,60,0]) cylinder(r=4.2, h=5, $fn=6, center=true);
             }
 
             

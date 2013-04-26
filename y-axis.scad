@@ -9,27 +9,27 @@ aluminiu_profile=30.2;
 verticalHole=8.7;
 
 y_motor_mount();
-//y_axis();
-//translate([10,23,-90])color("red",0.3)cube([2,5,90]);
-//translate([0,36,0])color("red",0.3)cube([200,2,200],center=true);
-//translate([-52,24,-70])rotate([0,0,-90]){
-//	y_bearing();
-//	color("gray",0.3)cylinder(r=4, h=90);
-//}
+translate([0,0,-90])y_axis();
+%translate([10,23,-90])color("red",0.3)cube([2,5,90]);
+%translate([0,36,0])color("red",0.3)cube([200,2,200],center=true);
+%translate([-52,24,-70])rotate([0,0,-90]){
+	y_bearing();
+	translate([0,0,-90])color("gray",0.3)cylinder(r=4, h=180);
+}
 
-//translate([52,24,-70])rotate([0,0,-90]){
-//	y_bearing();
-//	color("gray",0.3)cylinder(r=4, h=90);
-//}
-//translate([12,25,-80])rotate([0,0,-90])y_belt_holder();
+%translate([52,24,-70])rotate([0,0,-90]){
+	y_bearing();
+	translate([0,0,-90])color("gray",0.3)cylinder(r=4, h=180);
+}
+%translate([12,25,-80])rotate([0,0,-90])y_belt_holder();
 
-//color("blue",0.3)translate([0,30,0])rotate([90,0,0]){
-//	inner();
-//	translate([0,0,10])rotate([180,0,0])outer();
-//}
+%color("blue",0.3)translate([0,30,0])rotate([90,0,0]){
+	inner();
+	translate([0,0,10])rotate([180,0,0])outer();
+}
 
 
-//y_motor_mount();
+
 module y_axis(){
 	difference(){
 		translate([0,12,0])cube([120,aluminiu_profile+10,14], center=true);
@@ -46,7 +46,8 @@ module smoothbar_support(){
 		translate([62,-23.4,0])cylinder(r=40,h=15, center=true,$fn=100);
 		translate([60.01,16.1,-11])rotate([0,0,-270])roundcorner(6);
 		translate([60.01,32.1,-11])rotate([0,0,180])roundcorner(6);
-		translate([52,24,-20])polyhole(smooth_bar_diameter,40);
+		translate([52,24,-20])pushfit_rod(8.4,50)
+//polyhole(smooth_bar_diameter,40);
 		translate([-52,24,-20])polyhole(smooth_bar_diameter,40);
 }
 module motor_fix(){
@@ -76,4 +77,10 @@ module y_motor_mount(){
 		}
 		translate([0,0,-6])cube([aluminiu_profile,aluminiu_profile,25], center=true);
 	}
+}
+module pushfit_rod(diameter,length){
+    cylinder(h = length, r=diameter/2, $fn=30);
+    translate([0,-diameter/4,length/2]) cube([diameter,diameter/2,length], center = true);
+
+    translate([0,-diameter/2-1.2,length/2]) cube([diameter,1,length], center = true);
 }

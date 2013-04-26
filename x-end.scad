@@ -10,6 +10,10 @@ include <configuration.scad>
 use <bushing.scad>
 
 
+//translate([40,-70,0]) x_end_idler(thru=false);
+translate([40,0,0]) x_end_motor();
+
+
 module x_end_motor(){
     mirror([0,1,0]) {
 
@@ -44,6 +48,7 @@ module x_end_base(vfillet=[3,3,3,3], thru=true, len=40){
                 translate([-13.75-0.5,-10+len/2,30]) cube_fillet([18.5,len,60], center = true, vertical=vfillet, top=[5,3,5,3]);
 					translate([0,17,4])nut(d=m8_nut_diameter,h=6.5);
                 bushing_negative(60);
+				translate([0,17,-0.1])nut_guide(60,true);
             }
             //rotate([0,0,0]) translate([0,-9.5,0]) 
             if (bearing_choice == 1) {
@@ -51,23 +56,7 @@ module x_end_base(vfillet=[3,3,3,3], thru=true, len=40){
             } else {
                 linear_bearing(60);
             }
-            // Nut trap
-            difference(){
-                if ((bearing_choice != 1) || (bushing_type == 2)) {
-                translate([-2,17.5,7]) cube_fillet([14,18,14], center = true, vertical=[3,0,0,0]);
-                } else {
-                translate([-2,17.5,4]) cube_fillet([16,18,8], center = true, vertical=[3,0,0,3]);
-                }
-
-                //bottom hole
-                
-                translate([0,17,-1]) cylinder(h = 10, r=4.6);
-                //nut slid in
-                translate([0,17,4])nut(d=m8_nut_diameter,h=6.5);
-//cube([9.2*2,9.2*sqrt(3/4)+0.4,4.1], center = true);
-
-                translate([0,17,6.5]) cylinder(h = 10, r=4.6);
-            }
+            translate([0,17,0])nut_guide(60);
         }
 
         // belt hole
@@ -90,23 +79,35 @@ module x_end_base(vfillet=[3,3,3,3], thru=true, len=40){
 
 }
 
+module nut_guide(height,fill=false){
+	difference(){
+		translate([0,0,height/2])nut(m8_nut_diameter,h=2);
+		if(fill==false){
+			cylinder(h = 70, r=4.2);
+		}
+	}
+	difference(){
+		nut(m8_nut_diameter+4,h=height);
+
+		if(fill==false){
+			translate([0,0,-1])nut(m8_nut_diameter,h=height+2);
+		}
+	}
+}
+
 
 module x_end_idler(){
     difference() {
         x_end_base(len=42+idler_size_inner_r);
         // idler hole
-        translate([0,17+6+idler_size_inner_r,30.25-((bearing_type==0)? 3 : 0)]) rotate([0,-90,0]) cylinder(h = 80, r=idler_size_inner_r-0.2, $fn=30);
-        if (bearing_type == 0) 
-        translate([-9,17+6+idler_size_inner_r,30.25-3]) {
-            rotate([0,-90,0]) cylinder(h = 10, r=idler_size/2+4, $fn=30);
-            translate([-5,10,0]) cube([10,20,idler_size+8], center=true);
-        }
+        translate([0,17+6+idler_size_inner_r,30.25-((bearing_type==0)? 3 : 0)]) rotate([0,-90,0]) cylinder(h = 80, r=2, $fn=30);
+		translate([5,17+6+idler_size_inner_r,30.25-((bearing_type==0)? 3 : 0)]) rotate([0,-90,0])cylinder(r=m4_diameter,h=10,$fn=6);
+        
     }
+
 }
 
-//mirror([0,0,0]) x_end_idler(thru=true);
-// translate([40,40,0]) x_end_idler(thru=false);
-translate([40,0,0]) x_end_motor();
+
 
 module pushfit_rod(diameter,length){
     cylinder(h = length, r=diameter/2, $fn=30);
